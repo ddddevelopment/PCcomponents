@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters import Command
+from aiogram.filters import Command, CommandStart
 from aiogram.fsm.storage.memory import MemoryStorage
 
 logging.basicConfig(level=logging.INFO)
@@ -11,7 +11,7 @@ bot = Bot(token=API_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
-@dp.message(Command("start"))
+@dp.message(CommandStart())
 async def send_welcome(message: types.Message):
     await message.reply("Привет! Я твой Telegram бот. Чтобы зарегистрироваться, используй команду /register")
 
