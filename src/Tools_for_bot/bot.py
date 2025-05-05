@@ -1,0 +1,27 @@
+import asyncio
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
+from aiogram.fsm.storage.memory import MemoryStorage
+
+logging.basicConfig(level=logging.INFO)
+
+API_TOKEN = '7518012877:AAETe5fbbD4PraytXhKn6nUrkQRz3Xfoh6Q'  # Замени на свой токен
+bot = Bot(token=API_TOKEN)
+storage = MemoryStorage()
+dp = Dispatcher(storage=storage)
+
+@dp.message(Command("start"))
+async def send_welcome(message: types.Message):
+    await message.reply("Привет! Я твой Telegram бот. Чтобы зарегистрироваться, используй команду /register")
+
+@dp.message(Command("help"))
+async def help_command(message: types.Message):
+    await message.reply("Доступные команды:\n/start - начать работу с ботом\n/register - регистрация в системе")
+
+async def main():
+    await bot.delete_webhook(drop_pending_updates=True)
+    await dp.start_polling(bot)
+
+if __name__ == '__main__':
+    asyncio.run(main())
