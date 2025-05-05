@@ -4,9 +4,9 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from config import config
-from handlers import common, registration
-from .services.users_service import users_service
+from src.Tools_for_bot.config import config
+from src.Tools_for_bot.handlers import common, registration
+from src.Tools_for_bot.services.users_service import users_service
 
 
 async def main() -> None:
