@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from app.config import BOT_TOKEN
 from app.handlers.user import register, profile
-from app.handlers.product import view_products
+from app.handlers.product import view_products, get_product
 
 
 async def main():
@@ -12,6 +12,7 @@ async def main():
     dp.include_router(register.router)
     dp.include_router(profile.router)
     dp.include_router(view_products.router)
+    dp.include_router(get_product.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
