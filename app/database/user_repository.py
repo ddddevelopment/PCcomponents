@@ -19,6 +19,7 @@ def create_user(telegram_id: int, name: str):
         "INSERT INTO users (telegram_id, name) VALUES (%s, %s)",
         (telegram_id, name)
     )
+
     conn.commit()
 
     cursor.close()

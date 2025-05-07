@@ -9,3 +9,8 @@ async def register_user(telegram_id: int, name: str) -> bool:
 
     await asyncio.to_thread(user_repository.create_user, telegram_id, name)
     return True
+
+
+async def get_user_profile(telegram_id: int) -> dict | None:
+    user = await asyncio.to_thread(user_repository.get_user_by_telegram_id, telegram_id)
+    return user
