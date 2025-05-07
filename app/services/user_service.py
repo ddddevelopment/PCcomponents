@@ -1,5 +1,5 @@
 import asyncio
-from app.database import user_repository
+from app.database.repositories import user_repository
 
 
 async def register_user(telegram_id: int, name: str) -> bool:

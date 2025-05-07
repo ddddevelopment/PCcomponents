@@ -1,10 +1,11 @@
-from aiogram import Router, types, F
+from aiogram import Router, types
+from aiogram.filters import Command
 from app.services.user_service import get_user_profile
 
 
 router = Router()
 
-@router.message(F.text == "/profile")
+@router.message(Command("profile"))
 async def handle_profile(message: types.Message):
     telegram_id = message.from_user.id
     user = await get_user_profile(telegram_id)
