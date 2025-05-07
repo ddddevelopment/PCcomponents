@@ -24,3 +24,23 @@ def add_to_cart(user_id: int, product_id: int):
 
     conn.commit()
     conn.close()
+
+
+def get_cart_items(user_id: int) -> list[dict]:
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT
+            p.id AS product_id,
+            p.name,
+            p.price,
+            c.quantity,
+            (p.price * c.quantity) AS total_price
+        FROM cart_items c
+        JOIN products p ON p.id = c.product_id
+        WHERE c.user_id = %s
+    """, (user_id,))
+
+    items = cursor.fetchall()
+    conn.close()
+    return items
