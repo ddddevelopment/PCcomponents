@@ -44,3 +44,14 @@ def get_cart_items(user_id: int) -> list[dict]:
     items = cursor.fetchall()
     conn.close()
     return items
+
+def remove_from_cart(user_id: int, product_id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        DELETE 
+        FROM cart_items 
+        WHERE user_id = %s AND product_id = %s    
+    """, (user_id, product_id))
+    conn.commit()
+    conn.close()

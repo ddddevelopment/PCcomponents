@@ -3,7 +3,7 @@ from aiogram import Bot, Dispatcher
 from app.config import BOT_TOKEN
 from app.handlers.user import register, profile
 from app.handlers.product import view_products, get_product
-from app.handlers.cart import add_to_cart, view_cart
+from app.handlers.cart import add_to_cart, view_cart, remove_from_cart
 
 async def main():
     bot = Bot(token=BOT_TOKEN)
@@ -15,6 +15,7 @@ async def main():
     dp.include_router(get_product.router)
     dp.include_router(add_to_cart.router)
     dp.include_router(view_cart.router)
+    dp.include_router(remove_from_cart.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
